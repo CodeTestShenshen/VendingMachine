@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace VendingMachineApp.Models
 {
     public enum States { NSW, WA, VIC, QLD}
-    public class Machine : BaseModel, IActive
+    public class Machine : BaseModel, IActive, IUnique
     {
         [Required]
+        [StringLength(100)]
+        [Index(IsUnique = true)]
         public string SeriesNumber { get; set; } 
         [StringLength (200)]
         [Required]
@@ -22,5 +25,6 @@ namespace VendingMachineApp.Models
         [Required]
         public bool IsActive { get; set; }
 
-    }
+        public ICollection<Transaction> Transactions { get; set; }
+        } 
 }

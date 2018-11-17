@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
-using System.Web;
 using VendingMachineApp.Models;
 
 namespace VendingMachineApp.Database
@@ -11,5 +10,47 @@ namespace VendingMachineApp.Database
     {
         public DbSet<Machine> Machines { get; set; }
         public DbSet<Operator> Operators { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<Machine>()
+                .HasMany(m => m.Transactions)
+                .WithRequired(t => t.Machine)
+                .HasForeignKey(t => t.MachineId);
+
+            // soft deletion
+            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        }
+
+        public override int SaveChanges()
+        {
+            ChangeTracker.DetectChanges();
+            var stateManager = ((IObjectContextAdapter) this).ObjectContext.ObjectStateManager;
+
+            // soft deletion: get all entities to be deleted implemented IActive 
+            var deleteEntities = stateManager
+                .GetObjectStateEntries(EntityState.Deleted)
+                .Select(a => a.Entity)
+                .OfType<IActive>()
+                .ToArray();
+
+            foreach (var entity in deleteEntities)
+            {
+                if (entity == null)
+                    continue;
+
+                // Updating entity in db by changing state from deleted to modifed
+                stateManager.ChangeObjectState(entity, EntityState.Modified);
+                entity.IsActive = false;
+            }
+    
+            return base.SaveChanges();
+        }
+
+
+
+
     }
 }

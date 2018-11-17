@@ -165,8 +165,15 @@
     <Compile Include="Migrations\201811171304172_InitialModel.Designer.cs">
       <DependentUpon>201811171304172_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811172122144_AddUniqueConstraint.cs" />
+    <Compile Include="Migrations\201811172122144_AddUniqueConstraint.Designer.cs">
+      <DependentUpon>201811172122144_AddUniqueConstraint.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\IUnique.cs" />
     <Compile Include="Models\IActive.cs" />
+    <Compile Include="Models\Flaviour.cs" />
+    <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Operator.cs" />
     <Compile Include="Models\Machine.cs" />
     <Compile Include="Models\BaseModel.cs" />
@@ -183,6 +190,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811171304172_InitialModel.resx">
       <DependentUpon>201811171304172_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811172122144_AddUniqueConstraint.resx">
+      <DependentUpon>201811172122144_AddUniqueConstraint.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
