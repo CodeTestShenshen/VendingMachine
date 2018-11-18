@@ -18,5 +18,7 @@ namespace VendingMachineApp.Models
         public string Name { get; set; }
         [Required]
         public bool IsActive { get; set; }
+
+        public ICollection<Transaction> Transactions { get; set; }
     }
 }

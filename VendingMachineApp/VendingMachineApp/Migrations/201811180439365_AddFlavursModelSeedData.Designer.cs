@@ -7,13 +7,13 @@ namespace VendingMachineApp.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.2.0-61023")]
-    public sealed partial class AddFlavursModelAndSeedData : IMigrationMetadata
+    public sealed partial class AddFlavursModelSeedData : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(AddFlavursModelAndSeedData));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(AddFlavursModelSeedData));
         
         string IMigrationMetadata.Id
         {
-            get { return "201811180121362_AddFlavursModelAndSeedData"; }
+            get { return "201811180439365_AddFlavursModelSeedData"; }
         }
         
         string IMigrationMetadata.Source

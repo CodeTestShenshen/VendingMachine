@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using VendingMachineApp.Database;
 using VendingMachineApp.Helper;
 using VendingMachineApp.Models;
+using VendingMachineApp.Services;
 
 namespace IntegrationTests
 {
@@ -59,6 +60,33 @@ namespace IntegrationTests
             };
         }
 
+        private Transaction GetFakeTransaction(Machine fakeMachine, Flaviour fakeFlaviour)
+        {
+            return new Transaction()
+            {
+               Machine = fakeMachine,
+               Flaviour = fakeFlaviour,
+               FlaviourId = fakeFlaviour.Id,
+               PriceInCents = 2500 ,
+               IsActive = true,
+               TransactionType = TransactionType.cash,
+               MachineId = fakeMachine.Id,
+               TansactionTime = DateTime.Now
+
+            };
+        }
+
+        private Flaviour GetFakeFlaviour(string sNum)
+        {
+            return new Flaviour()
+            {
+                SeriesNumber = sNum,
+                PriceInCents = 2500,
+                Name = "f1",
+                IsActive = true
+            };
+        } 
+
         [TestMethod]
         public void VendingMachineContextTest_InitilizeSeedData_Successfully()
         {
@@ -75,18 +103,90 @@ namespace IntegrationTests
         }
 
         [TestMethod]
-        public void VendingMachineContextTest_InitilizeSeedData2_Successfully()
+        public void RepositoryTest_GetMachines_ReturnAllSeedMachines()
         {
             // arrange
-            var sNum = Guid.NewGuid().ToString();
-            var stubMachine = GetFakeMachine(sNum);
+            var repository = new Repository(testDBName);
 
             //action
-           var result = testContext.Machines.Add(stubMachine);
-            testContext.SaveChanges();
+            var result = repository.GetMachines();
             //assert
-            Assert.IsTrue(testContext.Machines.Any(m=> m.SeriesNumber == sNum));
+            Assert.IsTrue(result.Any(m => m.SeriesNumber == AppHelper.SeedMachineNum1));
+            Assert.IsTrue(result.Any(m => m.SeriesNumber == AppHelper.SeedMachineNum2));
+            Assert.IsTrue(result.Any(m => m.SeriesNumber == AppHelper.SeedMachineNum3));
+            Assert.IsTrue(result.Any(m => m.SeriesNumber == AppHelper.SeedMachineNum4));
 
+        }
+
+        [TestMethod]
+        public void RepositoryTest_GetMachineByseriesNumber_ReturnAMachine()
+        {
+            // arrange
+            var repository = new Repository(testDBName);
+
+            //action
+            var result = repository.GetMachineByseriesNumber(AppHelper.SeedMachineNum1);
+            //assert
+            Assert.IsTrue(result.SeriesNumber == AppHelper.SeedMachineNum1); 
+
+        }
+
+        [TestMethod]
+        public void RepositoryTest_DeleteMachine_SetMachineActiveAsFalse()
+        {
+            // arrange
+            var repository = new Repository(testDBName);
+            
+            //action
+            repository.DeleteMachine(AppHelper.SeedMachineNum2);
+            var result = repository.GetMachineByseriesNumber(AppHelper.SeedMachineNum2);
+            //assert
+            Assert.IsTrue(testContext.Machines.Any(m => m.IsActive == false)); 
+
+        }
+
+        [TestMethod]
+        public void RepositoryTest_GetTransactions_ReturnTransactions()
+        {
+            // arrange
+            var repository = new Repository(testDBName);
+            var flaviour = testContext.Flaviours.FirstOrDefault();
+            var machine = testContext.Machines.FirstOrDefault();
+
+            var stubTransaction = GetFakeTransaction(machine, flaviour);
+             
+            // to avoid from adding reference too
+            stubTransaction.Machine = null;
+            stubTransaction.Flaviour = null;
+           
+            testContext.Transactions.Add(stubTransaction);         
+            testContext.SaveChanges();
+
+            //action
+            var result = repository.GetTransactions(machine.SeriesNumber).FirstOrDefault();
+            //assert
+            Assert.IsTrue(result.MachineId == machine.Id); 
+
+        }
+
+        [TestMethod]
+        public void RepositoryTest_SaveTransaction_SaveNewTransaction()
+        {
+            // arrange
+            var repository = new Repository(testDBName);
+            var newFlaviour = testContext.Flaviours.FirstOrDefault();
+            var newMachine = testContext.Machines.FirstOrDefault();
+       
+ 
+            var stubTransaction = GetFakeTransaction(newMachine, newFlaviour);
+
+            // to avoid from adding reference too
+            stubTransaction.Machine = null;
+            stubTransaction.Flaviour = null;
+            //action
+             repository.SaveTransaction(stubTransaction);
+            //assert 
+            var a = testContext.Transactions.Where(t => t.MachineId == newMachine.Id).FirstOrDefault();
         }
     }
 }

@@ -174,9 +174,17 @@
     <Compile Include="Migrations\201811180059263_AddSeedsData.Designer.cs">
       <DependentUpon>201811180059263_AddSeedsData.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201811180121362_AddFlavursModelAndSeedData.cs" />
-    <Compile Include="Migrations\201811180121362_AddFlavursModelAndSeedData.Designer.cs">
-      <DependentUpon>201811180121362_AddFlavursModelAndSeedData.cs</DependentUpon>
+    <Compile Include="Migrations\201811180438536_AddFlavursModel.cs" />
+    <Compile Include="Migrations\201811180438536_AddFlavursModel.Designer.cs">
+      <DependentUpon>201811180438536_AddFlavursModel.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811180439365_AddFlavursModelSeedData.cs" />
+    <Compile Include="Migrations\201811180439365_AddFlavursModelSeedData.Designer.cs">
+      <DependentUpon>201811180439365_AddFlavursModelSeedData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811180555426_AddFlavursModelSeedData2.cs" />
+    <Compile Include="Migrations\201811180555426_AddFlavursModelSeedData2.Designer.cs">
+      <DependentUpon>201811180555426_AddFlavursModelSeedData2.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IUnique.cs" />
@@ -206,8 +214,14 @@
     <EmbeddedResource Include="Migrations\201811180059263_AddSeedsData.resx">
       <DependentUpon>201811180059263_AddSeedsData.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201811180121362_AddFlavursModelAndSeedData.resx">
-      <DependentUpon>201811180121362_AddFlavursModelAndSeedData.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201811180438536_AddFlavursModel.resx">
+      <DependentUpon>201811180438536_AddFlavursModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180439365_AddFlavursModelSeedData.resx">
+      <DependentUpon>201811180439365_AddFlavursModelSeedData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180555426_AddFlavursModelSeedData2.resx">
+      <DependentUpon>201811180555426_AddFlavursModelSeedData2.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

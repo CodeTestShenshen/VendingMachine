@@ -12,15 +12,15 @@ namespace VendingMachineApp.Helper
         public  const string SeedMachineNum3 = "2212";
         public  const string SeedMachineNum4 = "3333";
 
-        public const string SeedFlavourNum1 = "f1";
-        public const string SeedFlavourNum2 = "f2";
-        public const string SeedFlavourNum3 = "f3";
-        public const string SeedFlavourNum4 = "f4";
-        public const string SeedFlavourNum5 = "f5";
-        public const string SeedFlavourNum6 = "f6";
-        public const string SeedFlavourNum7 = "f7";
-        public const string SeedFlavourNum8 = "f8";
-        public const string SeedFlavourNum9 = "f9";
-        public const string SeedFlavourNum10 = "f10"; 
+        public const string SeedFlavourNum1 = "123";
+        public const string SeedFlavourNum2 = "124";
+        public const string SeedFlavourNum3 = "144";
+        public const string SeedFlavourNum4 = "245";
+        public const string SeedFlavourNum5 = "1236";
+        public const string SeedFlavourNum6 = "12356";
+        public const string SeedFlavourNum7 = "12355";
+        public const string SeedFlavourNum8 = "1233";
+        public const string SeedFlavourNum9 = "12333";
+        public const string SeedFlavourNum10 = "44223"; 
     }
 }

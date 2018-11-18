@@ -33,6 +33,11 @@ namespace VendingMachineApp.Database
                 .WithRequired(t => t.Machine)
                 .HasForeignKey(t => t.MachineId);
 
+            modelBuilder.Entity<Flaviour>()
+                .HasMany(f => f.Transactions)
+                .WithRequired(t => t.Flaviour)
+                .HasForeignKey(t => t.FlaviourId);
+
             // soft deletion
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
         }
