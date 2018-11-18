@@ -60,13 +60,13 @@ namespace IntegrationTests
             };
         }
 
-        private Transaction GetFakeTransaction(Machine fakeMachine, Flaviour fakeFlaviour)
+        private Transaction GetFakeTransaction(Machine fakeMachine, Flavour fakeFlaviour)
         {
             return new Transaction()
             {
                Machine = fakeMachine,
-               Flaviour = fakeFlaviour,
-               FlaviourId = fakeFlaviour.Id,
+               Flavour = fakeFlaviour,
+               FlavourId = fakeFlaviour.Id,
                PriceInCents = 2500 ,
                IsActive = true,
                TransactionType = TransactionType.cash,
@@ -76,9 +76,9 @@ namespace IntegrationTests
             };
         }
 
-        private Flaviour GetFakeFlaviour(string sNum)
+        private Flavour GetFakeFlaviour(string sNum)
         {
-            return new Flaviour()
+            return new Flavour()
             {
                 SeriesNumber = sNum,
                 PriceInCents = 2500,
@@ -157,11 +157,12 @@ namespace IntegrationTests
              
             // to avoid from adding reference too
             stubTransaction.Machine = null;
-            stubTransaction.Flaviour = null;
+            stubTransaction.Flavour = null;
            
             testContext.Transactions.Add(stubTransaction);         
             testContext.SaveChanges();
-
+            var d = testContext.Transactions.FirstOrDefault();
+            testContext.Dispose();
             //action
             var result = repository.GetTransactions(machine.SeriesNumber).FirstOrDefault();
             //assert
@@ -182,11 +183,13 @@ namespace IntegrationTests
 
             // to avoid from adding reference too
             stubTransaction.Machine = null;
-            stubTransaction.Flaviour = null;
+            stubTransaction.Flavour = null;
             //action
              repository.SaveTransaction(stubTransaction);
             //assert 
-            var a = testContext.Transactions.Where(t => t.MachineId == newMachine.Id).FirstOrDefault();
+            var b = testContext.Transactions.Where(t => t.MachineId == newMachine.Id).FirstOrDefault();
+            Assert.IsTrue(b.Machine.SeriesNumber == newMachine.SeriesNumber );
+            Assert.IsTrue(b.Flavour.SeriesNumber == newFlaviour.SeriesNumber);
         }
     }
 }

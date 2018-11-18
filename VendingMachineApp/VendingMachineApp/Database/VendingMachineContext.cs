@@ -11,7 +11,7 @@ namespace VendingMachineApp.Database
         public DbSet<Machine> Machines { get; set; }
         public DbSet<Operator> Operators { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Flaviour> Flaviours { get; set; }
+        public DbSet<Flavour> Flaviours { get; set; }
 
         public VendingMachineContext() : base()
         {
@@ -33,10 +33,10 @@ namespace VendingMachineApp.Database
                 .WithRequired(t => t.Machine)
                 .HasForeignKey(t => t.MachineId);
 
-            modelBuilder.Entity<Flaviour>()
+            modelBuilder.Entity<Flavour>()
                 .HasMany(f => f.Transactions)
-                .WithRequired(t => t.Flaviour)
-                .HasForeignKey(t => t.FlaviourId);
+                .WithRequired(t => t.Flavour)
+                .HasForeignKey(t => t.FlavourId);
 
             // soft deletion
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();

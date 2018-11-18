@@ -7,7 +7,7 @@ using System.Web;
 
 namespace VendingMachineApp.Models
 {
-    public class Flaviour : BaseModel, IActive, IUnique
+    public class Flavour : BaseModel, IActive, IUnique
     {
         [Required]
         public string SeriesNumber { get; set; }
@@ -19,6 +19,6 @@ namespace VendingMachineApp.Models
         [Required]
         public bool IsActive { get; set; }
 
-        public ICollection<Transaction> Transactions { get; set; }
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

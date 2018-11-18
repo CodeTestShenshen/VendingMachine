@@ -4,38 +4,52 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using VendingMachineApp.Services;
+using VendingMachineApp.ViewModels;
 
 namespace VendingMachineApp.Controllers
 {
     public class TransactionController : ApiController
     {
-        // GET: api/Transaction
-        public IEnumerable<string> Get()
+        private readonly IRepository repository;
+
+        public TransactionController(IRepository repository)
         {
-            return new string[] { "value1", "value2" };
+            this.repository = repository;
         }
 
-        // GET: api/Transaction/5
+       
         [HttpGet]
-        [Route ("Machine/{machineId}/Transaction/{id}")]
-        public string Get(int machineId, int id)
+        [Route ("api/Machine/{seriesNumber}/Transactions")]
+        public IHttpActionResult GetTransactions(string seriesNumber)
         {
-            return "value123";
+            var transactions = repository.GetTransactions(seriesNumber);
+            if (transactions == null)
+            {
+                return NotFound();
+            } 
+
+            return Ok(transactions.Select(t => TransactionModel.Create(t)));
         }
 
-        // POST: api/Transaction
-        public void Post([FromBody]string value)
+        [HttpPost]
+        [Route("api/Transaction")]
+        public IHttpActionResult SaveTransaction([FromBody]TransactionModel value)
         {
-        }
+            var machine  = repository.GetMachineByseriesNumber(value.MachineSeriesNumber);
+            if (machine == null)
+            {
+                return BadRequest();
+            }
+            var flavour  = repository.GetFlavourBySeriesNumber(value.FlavourSeriesNumber);
+            if (flavour == null)
+            {
+                return BadRequest();
+            }
 
-        // PUT: api/Transaction/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Transaction/5
-        public void Delete(int id)
-        {
+            var transaction = TransactionModel.Create(value, machine.Id, flavour.Id);
+             repository.SaveTransaction(transaction);
+            return CreatedAtRoute("DefaultApi", new {controller = "Transaction", id = transaction.Id}, transaction);
         }
     }
 }

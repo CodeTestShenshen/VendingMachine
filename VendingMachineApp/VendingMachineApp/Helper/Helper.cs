@@ -22,5 +22,7 @@ namespace VendingMachineApp.Helper
         public const string SeedFlavourNum8 = "1233";
         public const string SeedFlavourNum9 = "12333";
         public const string SeedFlavourNum10 = "44223"; 
+
+        public const string DBConnectName = "ContextConnString";
     }
 }

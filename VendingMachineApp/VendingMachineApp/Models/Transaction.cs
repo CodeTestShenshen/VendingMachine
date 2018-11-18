@@ -16,10 +16,10 @@ namespace VendingMachineApp.Models
         [Required]
         public int MachineId { get; set; }
         
-        public Flaviour Flaviour { get; set; }
+        public Flavour Flavour { get; set; }
 
         [Required]
-        public int FlaviourId { get; set; }
+        public int FlavourId { get; set; }
 
         [Required]
         public TransactionType TransactionType { get; set; }

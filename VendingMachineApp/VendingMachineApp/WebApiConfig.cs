@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Http;
+using VendingMachineApp.Helper;
 
 namespace VendingMachineApp
 {
@@ -15,7 +16,7 @@ namespace VendingMachineApp
             config.MapHttpAttributeRoutes();
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "{controller}/{id}",
+                routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
             InitializeIoc();
@@ -23,8 +24,7 @@ namespace VendingMachineApp
 
         private static void InitializeIoc()
         {
-            var container = new WindsorContainer();
-            container.Install(new WebApiIocInstaller());
+            IOCLocator.Container.Install(new WebApiIocInstaller());
         }
     }
 }

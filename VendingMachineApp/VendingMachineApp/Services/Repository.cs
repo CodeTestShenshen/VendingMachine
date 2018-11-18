@@ -24,9 +24,14 @@ namespace VendingMachineApp.Services
         public DbContextCreator(string connString)
         {
             if (string.IsNullOrEmpty(connString))
+            {
                 _context = new VendingMachineContext();
+            }
             else
+            {
                 _context = new VendingMachineContext(connString);
+            }
+            
         }
         public void Dispose()
         {
@@ -55,6 +60,14 @@ namespace VendingMachineApp.Services
             }
         }
 
+        public Flavour GetFlavourBySeriesNumber(string seriesNumber)
+        {
+            using (dbCreator = new DbContextCreator(connString))
+            {
+                return dbCreator.DbContext.Flaviours.Where(m => m.SeriesNumber == seriesNumber).FirstOrDefault();
+            }
+        }
+       
         public  IEnumerable<Machine> GetMachines()
         {
             using (dbCreator = new DbContextCreator(connString))
@@ -84,7 +97,7 @@ namespace VendingMachineApp.Services
                 {
                     // check reference
                     if (!dbCreator.DbContext.Machines.Any(m => m.Id == transaction.MachineId)
-                        || !dbCreator.DbContext.Flaviours.Any(f => f.Id == transaction.FlaviourId))
+                        || !dbCreator.DbContext.Flaviours.Any(f => f.Id == transaction.FlavourId))
                     {
                         Console.WriteLine("No reference resouces found");
                         return;
@@ -99,7 +112,7 @@ namespace VendingMachineApp.Services
                         {
                             //update
                             trans.MachineId = transaction.MachineId;
-                            trans.FlaviourId = transaction.FlaviourId;
+                            trans.FlavourId = transaction.FlavourId;
                             trans.IsActive = transaction.IsActive;
                             trans.PriceInCents = transaction.PriceInCents;
                             trans.TransactionType = transaction.TransactionType;
@@ -109,7 +122,7 @@ namespace VendingMachineApp.Services
 
                     // create new
                     transaction.Machine = null;
-                    transaction.Flaviour = null;
+                    transaction.Flavour = null;
 
                     dbCreator.DbContext.Transactions.Add(transaction);  
                     dbCreator.DbContext.SaveChanges();
@@ -127,6 +140,9 @@ namespace VendingMachineApp.Services
         {
             using (dbCreator = new DbContextCreator(connString))
             {
+                var transactions = dbCreator.DbContext.Transactions.Where(t =>
+                    t.Machine.IsActive && t.Machine.SeriesNumber == machineSeriesNumber).FirstOrDefault();
+            
                 return dbCreator.DbContext.Transactions.Where(t => t.Machine.IsActive && t.Machine.SeriesNumber == machineSeriesNumber).ToList();
             }
         }     

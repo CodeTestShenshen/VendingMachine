@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
+using VendingMachineApp.Helper;
 using VendingMachineApp.Services;
 
 namespace VendingMachineApp
@@ -13,7 +15,10 @@ namespace VendingMachineApp
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            container.Register(Component.For<IRepository>().ImplementedBy<Repository>());
+            // resolve all controllers
+            container.Register(Classes.FromThisAssembly().BasedOn<ApiController>().LifestylePerWebRequest());
+            container.Register(Component.For<IRepository>().ImplementedBy<Repository>()
+                .DependsOn(Dependency.OnValue("connString", AppHelper.DBConnectName)));
         }
     }
 }

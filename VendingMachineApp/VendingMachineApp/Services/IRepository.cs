@@ -9,6 +9,7 @@ namespace VendingMachineApp.Services
     public interface IRepository
     {
         Machine GetMachineByseriesNumber(string seriesNumber);
+        Flavour GetFlavourBySeriesNumber(string seriesNumber);
         IEnumerable<Machine> GetMachines();
         void DeleteMachine(string seriesNumber);
         void SaveTransaction(Transaction transaction);

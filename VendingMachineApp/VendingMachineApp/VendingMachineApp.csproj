@@ -161,7 +161,10 @@
     <Compile Include="Controllers\MachineController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Database\VendingMachineContext.cs" />
+    <Compile Include="Helper\WindsorCompositionRoot.cs" />
+    <Compile Include="Helper\WindsorApiResolver.cs" />
     <Compile Include="Helper\Helper.cs" />
+    <Compile Include="Helper\IOCLocator.cs" />
     <Compile Include="Migrations\201811171304172_InitialModel.cs" />
     <Compile Include="Migrations\201811171304172_InitialModel.Designer.cs">
       <DependentUpon>201811171304172_InitialModel.cs</DependentUpon>
@@ -186,10 +189,14 @@
     <Compile Include="Migrations\201811180555426_AddFlavursModelSeedData2.Designer.cs">
       <DependentUpon>201811180555426_AddFlavursModelSeedData2.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811180856445_fixSpello.cs" />
+    <Compile Include="Migrations\201811180856445_fixSpello.Designer.cs">
+      <DependentUpon>201811180856445_fixSpello.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IUnique.cs" />
     <Compile Include="Models\IActive.cs" />
-    <Compile Include="Models\Flaviour.cs" />
+    <Compile Include="Models\Flavour.cs" />
     <Compile Include="Models\Transaction.cs" />
     <Compile Include="Models\Operator.cs" />
     <Compile Include="Models\Machine.cs" />
@@ -198,12 +205,13 @@
     <Compile Include="Services\Repository.cs" />
     <Compile Include="Services\IRepository.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\FlavourModel.cs" />
+    <Compile Include="ViewModels\MachineModel.cs" />
+    <Compile Include="ViewModels\TransactionModel.cs" />
     <Compile Include="WebApiConfig.cs" />
     <Compile Include="WebApiIocInstallercs.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="ViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201811171304172_InitialModel.resx">
       <DependentUpon>201811171304172_InitialModel.cs</DependentUpon>
@@ -222,6 +230,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811180555426_AddFlavursModelSeedData2.resx">
       <DependentUpon>201811180555426_AddFlavursModelSeedData2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180856445_fixSpello.resx">
+      <DependentUpon>201811180856445_fixSpello.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

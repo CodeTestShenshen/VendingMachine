@@ -1,39 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
+using VendingMachineApp.Database;
+using VendingMachineApp.Services;
+using VendingMachineApp.ViewModels;
 
 namespace VendingMachineApp.Controllers
 {
     public class MachineController : ApiController
     {
-        // GET: api/Transaction
-        public IEnumerable<string> Get()
+        private readonly IRepository repository;
+
+        public MachineController(IRepository repository )
         {
-            return new string[] { "value1", "value2" };
+            this.repository = repository;
         }
 
-        // GET: api/Transaction/5
-        public string Get(int id)
+        [HttpGet]
+        [Route("api/Machines")]
+        public IHttpActionResult Get()
         {
-            return "value";
-        }
+            var machines = repository.GetMachines();
 
-        // POST: api/Transaction
-        public void Post([FromBody]string value)
-        {
+            if (machines == null)
+            {
+                return NotFound();
+            }
+            return Ok(machines.Select(m => MachineModel.Create(m)));
+            }
         }
-
-        // PUT: api/Transaction/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Transaction/5
-        public void Delete(int id)
-        {
-        }
-    }
+  
 }
