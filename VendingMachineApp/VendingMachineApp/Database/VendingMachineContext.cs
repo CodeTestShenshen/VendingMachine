@@ -1,7 +1,7 @@
 ﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
+using System.Linq; 
 using VendingMachineApp.Models;
 
 namespace VendingMachineApp.Database
@@ -10,9 +10,22 @@ namespace VendingMachineApp.Database
     {
         public DbSet<Machine> Machines { get; set; }
         public DbSet<Operator> Operators { get; set; }
+        public DbSet<Transaction> Transactions { get; set; }
+        public DbSet<Flaviour> Flaviours { get; set; }
 
+        public VendingMachineContext() : base()
+        {
+
+        }
+
+        public VendingMachineContext(string connName) : base(connName)
+        {
+             
+        }
+        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            System.Data.Entity.Database.SetInitializer<VendingMachineContext>(null); 
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<Machine>()

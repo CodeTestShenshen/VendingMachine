@@ -161,6 +161,7 @@
     <Compile Include="Controllers\MachineController.cs" />
     <Compile Include="Controllers\TransactionController.cs" />
     <Compile Include="Database\VendingMachineContext.cs" />
+    <Compile Include="Helper\Helper.cs" />
     <Compile Include="Migrations\201811171304172_InitialModel.cs" />
     <Compile Include="Migrations\201811171304172_InitialModel.Designer.cs">
       <DependentUpon>201811171304172_InitialModel.cs</DependentUpon>
@@ -168,6 +169,14 @@
     <Compile Include="Migrations\201811172122144_AddUniqueConstraint.cs" />
     <Compile Include="Migrations\201811172122144_AddUniqueConstraint.Designer.cs">
       <DependentUpon>201811172122144_AddUniqueConstraint.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811180059263_AddSeedsData.cs" />
+    <Compile Include="Migrations\201811180059263_AddSeedsData.Designer.cs">
+      <DependentUpon>201811180059263_AddSeedsData.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201811180121362_AddFlavursModelAndSeedData.cs" />
+    <Compile Include="Migrations\201811180121362_AddFlavursModelAndSeedData.Designer.cs">
+      <DependentUpon>201811180121362_AddFlavursModelAndSeedData.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IUnique.cs" />
@@ -193,6 +202,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811172122144_AddUniqueConstraint.resx">
       <DependentUpon>201811172122144_AddUniqueConstraint.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180059263_AddSeedsData.resx">
+      <DependentUpon>201811180059263_AddSeedsData.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811180121362_AddFlavursModelAndSeedData.resx">
+      <DependentUpon>201811180121362_AddFlavursModelAndSeedData.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -7,7 +7,7 @@ using System.Web;
 
 namespace VendingMachineApp.Models
 {
-    public enum States { NSW, WA, VIC, QLD}
+    public enum States { NSW = 1, WA, VIC, QLD}
     public class Machine : BaseModel, IActive, IUnique
     {
         [Required]
