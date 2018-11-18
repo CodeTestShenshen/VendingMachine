@@ -20,7 +20,7 @@ namespace VendingMachineApp.Controllers
 
        
         [HttpGet]
-        [Route ("api/Machine/{seriesNumber}/Transactions")]
+        [Route ("api/Machine/{seriesNumber}/Transaction")]
         public IHttpActionResult GetTransactions(string seriesNumber)
         {
             var transactions = repository.GetTransactions(seriesNumber);

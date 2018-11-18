@@ -1,12 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Dynamic;
 using System.Linq;
-using System.Threading.Tasks;
-using System.Web;
 using VendingMachineApp.Database;
 using VendingMachineApp.Models;
 

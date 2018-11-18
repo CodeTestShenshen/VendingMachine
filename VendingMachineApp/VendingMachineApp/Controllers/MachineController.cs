@@ -17,7 +17,7 @@ namespace VendingMachineApp.Controllers
         }
 
         [HttpGet]
-        [Route("api/Machines")]
+        [Route("api/Machine")]
         public IHttpActionResult Get()
         {
             var machines = repository.GetMachines();
