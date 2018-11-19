@@ -1,1 +1,8 @@
-<button [disabled]='!isEnabled()' (click)='onMoneySelect()'>{{cash.displayName}}</button>
+<div>
+  <h6 class="my-0">{{cash.displayName}}</h6>
+  <small class="text-muted">{{cash.quantity}} Left</small>
+</div>
+<span class="text-muted">{{getCashDispayValue()}}</span>
+<div class="float-right">
+  <button ngclss="getButtonClass()" [disabled]="!IsAvaible()" (click)="insertCash()">Insert</button>
+</div>
