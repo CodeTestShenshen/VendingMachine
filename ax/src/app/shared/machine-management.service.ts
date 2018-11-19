@@ -4,10 +4,14 @@ import { Flavour } from './flavour.model';
   providedIn: 'root'
 })
 export class MachineManagementService {
-  flavours: Flavour[] = [
+  private flavours: Flavour[] = [
     { SeriesNumber: '1234', PriceInCents: 1800, Name: 'Flavour one' },
     { SeriesNumber: '3214', PriceInCents: 3200, Name: 'Flavour two' },
     { SeriesNumber: '5214', PriceInCents: 11800, Name: 'Flavour three' },
   ];
   constructor() { }
+
+  getFlavours() {
+    return this.flavours;
+  }
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MachineManagementService } from '../shared/machine-management.service';
+import { Flavour } from '../shared/flavour.model';
 
 @Component({
   selector: 'app-flavour-panel',
@@ -7,9 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FlavourPanelComponent implements OnInit {
 
-  constructor() { }
+  constructor(private managementService: MachineManagementService) { }
 
   ngOnInit() {
   }
 
+  get flavourList(): Flavour[] {
+    return this.managementService.getFlavours();
+  }
 }
