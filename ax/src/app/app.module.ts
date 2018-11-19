@@ -6,13 +6,17 @@ import { AppComponent } from './app.component';
 import { CalculatorComponent } from './calculator/calculator.component';
 import { InputPanelComponent } from './calculator/input-panel/input-panel.component';
 import { InputButtonComponent } from './calculator/input-panel/input-button/input-button.component';
+import { FlavourPanelComponent } from './flavour-panel/flavour-panel.component';
+import { FlavourComponent } from './flavour-panel/flavour/flavour.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CalculatorComponent,
     InputPanelComponent,
-    InputButtonComponent
+    InputButtonComponent,
+    FlavourPanelComponent,
+    FlavourComponent
   ],
   imports: [
     BrowserModule,

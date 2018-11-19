@@ -1,13 +1,21 @@
 <h4 class="d-flex justify-content-between align-items-center mb-3">
-  <span class="text-muted">Your cart</span>
-  <span class="badge badge-secondary badge-pill">3</span>
+  <span class="text-muted">Cash Input: $ {{receivedCashDisplay}}</span>
+  <span class="badge badge-secondary badge-pill">Price: {{itemPriceDisplay}}</span>
 </h4>
-<app-input-panel> </app-input-panel>
-<form class="card p-2">
-  <div class="input-group">
-    <input type="text" class="form-control" placeholder="Promo code">
-    <div class="input-group-append">
-      <button type="submit" class="btn btn-secondary">Redeem</button>
-    </div>
+<app-input-panel (receiveCash)="onReceivedCash($event)"> </app-input-panel>
+
+<div class="input-group">
+  <div class="input-group-append">
+    <button class="btn btn-secondary">Cancel</button>
+
+    <button class="btn btn-primary" (click)="calculateChange()">Ok</button>
   </div>
-</form>
+</div>
+
+<div class="input-group">
+  <ul class="list-group mb-3">
+    <li *ngFor="let cash of  changeResult" class="list-group-item d-flex justify-content-between lh-condensed">
+      <span>{{cash.displayName}}: {{cash.quantity}}</span>
+    </li>
+  </ul>
+</div>
