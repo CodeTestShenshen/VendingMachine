@@ -40,7 +40,13 @@ export class InputButtonComponent implements OnInit {
   }
 
   onInsertCash() {
-    this.insertCash.emit(this.cash);
+
+    this.insertCash.emit({
+      cashType: this.cash.cashType,
+      unit: this.cash.unit,
+      displayName: this.cash.displayName,
+      quantity: 1
+    });
     console.log('cash is inserted: ');
     console.log(this.cash);
   }

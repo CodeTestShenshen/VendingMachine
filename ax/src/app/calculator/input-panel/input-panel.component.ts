@@ -11,7 +11,7 @@ import { StateMonitorService } from '../../shared/state-monitor.service';
 export class InputPanelComponent implements OnInit {
 
   @Output() receiveCash: EventEmitter<number> = new EventEmitter<number>();
-
+  @Input() cashList: Cash[];
   // amount in cents
   amountReceived = 0;
   constructor(private stateService: StateMonitorService) { }
@@ -23,12 +23,9 @@ export class InputPanelComponent implements OnInit {
     this.amountReceived += amount;
   }
 
-  getCashList(): Cash[] {
-    return this.stateService.getCashState();
-  }
   sumInputCash(cash: Cash) {
     this.amountReceived += cash.unit;
     this.receiveCash.emit(this.amountReceived);
-    this.stateService.updateCashState(cash);
+    this.stateService.updateCashState([cash]);
   }
 }

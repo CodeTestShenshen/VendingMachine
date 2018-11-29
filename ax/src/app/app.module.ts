@@ -8,6 +8,7 @@ import { InputPanelComponent } from './calculator/input-panel/input-panel.compon
 import { InputButtonComponent } from './calculator/input-panel/input-button/input-button.component';
 import { FlavourPanelComponent } from './flavour-panel/flavour-panel.component';
 import { FlavourComponent } from './flavour-panel/flavour/flavour.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { FlavourComponent } from './flavour-panel/flavour/flavour.component';
     FlavourComponent
   ],
   imports: [
+    FormsModule,
     BrowserModule,
     AppRoutingModule
   ],

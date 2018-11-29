@@ -21,7 +21,7 @@ export class FlavourComponent implements OnInit {
   }
 
   get flavourPriceDisplay(): string {
-    return this.flavour.PriceInCents.toFixed(2);
+    return (this.flavour.PriceInCents / 100).toFixed(2);
   }
 
 }

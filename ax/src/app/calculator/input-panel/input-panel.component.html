@@ -1,5 +1,5 @@
 <ul class="list-group mb-3">
-  <li *ngFor="let cash of  getCashList()" class="list-group-item d-flex justify-content-between lh-condensed">
+  <li *ngFor="let cash of  cashList" class="list-group-item d-flex justify-content-between lh-condensed">
     <app-input-button [cash]='cash' (insertCash)="sumInputCash($event)"></app-input-button>
   </li>
 </ul>

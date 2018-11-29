@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { Cash } from '../shared/running-state.model';
 import { StateMonitorService } from '../shared/state-monitor.service';
 
@@ -13,6 +14,7 @@ export class CalculatorComponent implements OnInit {
   changeResult: Cash[] = [];
   noEnoughtChange = false;
 
+  testValue = 0;
   constructor(private cashStateService: StateMonitorService) { }
 
 
@@ -30,14 +32,13 @@ export class CalculatorComponent implements OnInit {
   onReceivedCash(amount: number) {
     this.receivedCash = amount;
   }
-  calculateChange() {
-    const changeAmount = this.receivedCash - this.itemPrice;
-    this.changeResult = this.cashStateService.calculateChanges(changeAmount); // need async
 
-    if (this.changeResult) {
-      alert('can not give cash back!');
-    }
+  getCashList(): Cash[] {
+    return this.cashStateService.getCashState();
+  }
 
+  calculateChangeTest() {
+    this.cashStateService.calculateChanges(this.testValue * 100); // need async
   }
 }
 

@@ -2,13 +2,14 @@
   <span class="text-muted">Cash Input: $ {{receivedCashDisplay}}</span>
   <span class="badge badge-secondary badge-pill">Price: {{itemPriceDisplay}}</span>
 </h4>
-<app-input-panel (receiveCash)="onReceivedCash($event)"> </app-input-panel>
+<app-input-panel (receiveCash)="onReceivedCash($event)" [cashList]="getCashList()"> </app-input-panel>
 
 <div class="input-group">
   <div class="input-group-append">
     <button class="btn btn-secondary">Cancel</button>
+    this is test:<input type="text" [(ngModel)]="testValue">
+    <button class="btn btn-primary" (click)="calculateChangeTest()">TEST </button>
 
-    <button class="btn btn-primary" (click)="calculateChange()">Ok</button>
   </div>
 </div>
 
